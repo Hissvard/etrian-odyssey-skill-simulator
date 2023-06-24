@@ -1,17 +1,44 @@
 import PropTypes from "prop-types";
+import {useState} from "react";
+import {usePopper} from "react-popper";
+import SkillData from "./SkillData";
+import {createPortal} from "react-dom";
 
 export default function SkillNode(params) {
+    const [referenceElement, setReferenceElement] = useState(null);
+    const [popperElement, setPopperElement] = useState(null);
+    const [arrowElement, setArrowElement] = useState(null);
+    const { styles: popperStyles, attributes } = usePopper(referenceElement, popperElement, {
+        modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
+        placement: 'right',
+    });
+    const [visibleDescription, setVisibleDescription] = useState(false);
+
     return (
-        <div style={{
-            ...styles.container,
-            opacity: params.enabled ? 1 : .5,
-            backgroundColor: params.enabled ? '#015F9C' : '#23313C',
-        }}>
-            <span style={styles.name}>{params.name}</span>
-            <button style={styles.modifierButton} onClick={params.onClickDown}>-</button>
-            <button style={styles.modifierButton} onClick={params.onClickUp}>+</button>
-            <span style={styles.value}>{params.value} / 10</span>
-        </div>
+        <>
+            <div style={{
+                ...styles.container,
+                opacity: params.enabled ? 1 : .5,
+                backgroundColor: params.enabled ? '#015F9C' : '#23313C',
+            }}
+                 ref={setReferenceElement}
+                 onMouseEnter={() => setVisibleDescription(true)}
+                 onMouseLeave={() => setVisibleDescription(false)}
+            >
+                <span style={styles.name}>{params.name}</span>
+                <button style={styles.modifierButton} onClick={params.onClickDown}>-</button>
+                <button style={styles.modifierButton} onClick={params.onClickUp}>+</button>
+                <span style={styles.value}>{params.value} / 10</span>
+            </div>
+
+            {createPortal(<div ref={setPopperElement} style={{
+                ...popperStyles.popper,
+                display: visibleDescription ? '' : 'none',
+            }} {...attributes.popper}>
+                <SkillData data={params.data} />
+                <div ref={setArrowElement} style={popperStyles.arrow} />
+            </div>, document.body)}
+        </>
     );
 }
 
