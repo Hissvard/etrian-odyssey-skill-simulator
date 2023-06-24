@@ -6,23 +6,13 @@ export default function useSkillTree(params) {
 
     const [values, setValues] = useState(initialValues);
 
-    const increaseSkill = name => {
-        if (values[name] === 10) {
+    const applySkillModifier = (name, n) => {
+        if (values[name] + n >= 10 || values[name] + n < -1) {
             return;
         }
         setValues({
             ...values,
-            [name]: values[name] + 1,
-        });
-    };
-
-    const decreaseSkill = name => {
-        if (values[name] === 0) {
-            return;
-        }
-        setValues({
-            ...values,
-            [name]: values[name] - 1,
+            [name]: values[name] + n,
         });
     };
 
@@ -48,8 +38,8 @@ export default function useSkillTree(params) {
                     backgroundColor: areNeedsMet ? '#015F9C' : '#23313C',
                 }}>
                     <span style={styles.name}>{name}</span>
-                    <button style={styles.modifierButton} onClick={() => areNeedsMet && decreaseSkill(name)}>-</button>
-                    <button style={styles.modifierButton} onClick={() => areNeedsMet && increaseSkill(name)}>+</button>
+                    <button style={styles.modifierButton} onClick={() => areNeedsMet && applySkillModifier(name, -1)}>-</button>
+                    <button style={styles.modifierButton} onClick={() => areNeedsMet && applySkillModifier(name, 1)}>+</button>
                     <span style={styles.value}>{values[name] || 0} / 10</span>
                 </div>
             );
