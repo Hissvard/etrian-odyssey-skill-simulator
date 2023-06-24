@@ -1,5 +1,13 @@
 import './App.css';
 import useSkillTree from "./hooks/useSkillTree";
+import CrossTop from "./components/Lines/CrossTop";
+import CrossLeft from "./components/Lines/CrossLeft";
+import CrossRight from "./components/Lines/CrossRight";
+import CornerBottomLeft from "./components/Lines/CornerBottomLeft";
+import CornerTopRight from "./components/Lines/CornerTopRight";
+import LineHorizontal from "./components/Lines/LineHorizontal";
+import LineVertical from "./components/Lines/LineVertical";
+import CornerBottomRight from "./components/Lines/CornerBottomRight";
 
 function App() {
     const skillTree = useSkillTree({
@@ -65,87 +73,91 @@ function App() {
                 <tbody>
                     <tr>
                         <td>{skillTree.component('Axes')}</td>
-                        <td>-- lv 1 --</td>
+                        <td style={{position: 'relative'}}><CrossTop text='Lv1'/></td>
                         <td>{skillTree.component('Crush')}</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>-- lv 3 --</td>
+                        <td style={{position: 'relative'}}><CrossLeft text='Lv3'/></td>
                         <td>{skillTree.component('Stunner')}</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>-- lv 7 --</td>
+                        <td style={{position: 'relative'}}><CrossLeft text='Lv7'/></td>
                         <td>{skillTree.component('Silencer')}</td>
                     </tr>
                     <tr>
-                        <td>------</td>
-                        <td>------</td>
-                        <td>------</td>
+                        <td></td>
+                        <td style={{position: 'relative'}}><CornerBottomLeft/></td>
+                        <td style={{position: 'relative'}}><LineHorizontal/></td>
+                        <td style={{position: 'relative'}}><CornerTopRight/></td>
                     </tr>
                     <tr>
                         <td>{skillTree.component('Sword Mastery')}</td>
-                        <td>-- lv 1 --</td>
+                        <td style={{position: 'relative'}}><CrossTop text='Lv1'/></td>
                         <td>{skillTree.component('Cleaver')}</td>
+                        <td style={{position: 'relative'}}><LineVertical/></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>-- lv 5 --</td>
+                        <td style={{position: 'relative'}}><CrossLeft text='Lv5'/></td>
                         <td>{skillTree.component('Tornado')}</td>
+                        <td style={{position: 'relative'}}><LineVertical/></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>-- lv 5 --</td>
+                        <td style={{position: 'relative'}}><CrossLeft text='Lv5'/></td>
                         <td>{skillTree.component('2-Hit')}</td>
+                        <td style={{position: 'relative'}}><CornerBottomRight text='Lv5'/></td>
                     </tr>
                     <tr>
                         <td>{skillTree.component('HP Up')}</td>
-                        <td>|<br/>|<br/>|<br/></td>
-                        <td>-- lv 3 ---</td>
+                        <td style={{position: 'relative'}}><LineVertical/></td>
+                        <td style={{position: 'relative'}}><CornerBottomLeft text='Lv3'/></td>
                         <td>{skillTree.component('Allslash')}</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>--- lv 7 ---</td>
+                        <td style={{position: 'relative'}}><CrossLeft text='Lv7'/></td>
                         <td>{skillTree.component('Blazer')}</td>
-                        <td>--- lv 3 ---<br/>|<br/>|<br/>|</td>
+                        <td style={{position: 'relative'}}><CornerTopRight text='Lv3'/></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>--- lv 7 ---</td>
+                        <td style={{position: 'relative'}}><CrossLeft text='Lv7'/></td>
                         <td>{skillTree.component('Freezer')}</td>
-                        <td>--- lv 3 ---<br/>|<br/>|<br/>|</td>
+                        <td style={{position: 'relative'}}><CrossRight text='Lv3'/></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>--- lv 7 ---</td>
+                        <td style={{position: 'relative'}}><CornerBottomLeft text='Lv7'/></td>
                         <td>{skillTree.component('Shocker')}</td>
-                        <td>--- lv 3 ---<br/>|<br/>|<br/>|</td>
+                        <td style={{position: 'relative'}}><CrossRight text='Lv3'/></td>
                     </tr>
                     <tr>
                         <td>{skillTree.component('TP Up')}</td>
-                        <td>------------</td>
-                        <td>------------</td>
-                        <td>--|</td>
+                        <td style={{position: 'relative'}}><LineHorizontal/></td>
+                        <td style={{position: 'relative'}}><LineHorizontal/></td>
+                        <td style={{position: 'relative'}}><CornerBottomRight/></td>
                     </tr>
                     <tr>
                         <td>{skillTree.component('ATK Up')}</td>
-                        <td>--- lv3 ---</td>
+                        <td style={{position: 'relative'}}><CrossTop text='Lv3'/></td>
                         <td>{skillTree.component('War Cry')}</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>--- lv10 ---</td>
+                        <td style={{position: 'relative'}}><CornerBottomLeft text='Lv10'/></td>
                         <td>{skillTree.component('Hell Cry')}</td>
                     </tr>
                     <tr>
                         <td>{skillTree.component('DEF Up')}</td>
-                        <td>--- lv1 ---</td>
+                        <td style={{position: 'relative'}}><CrossTop text='Lv1'/></td>
                         <td>{skillTree.component('Arm Heal')}</td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>--- lv5 ---</td>
+                        <td style={{position: 'relative'}}><CornerBottomLeft text='Lv5'/></td>
                         <td>{skillTree.component('Flee')}</td>
                     </tr>
                     <tr>
