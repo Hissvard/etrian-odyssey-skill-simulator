@@ -27,7 +27,7 @@ export default function useSkillTree(params) {
     };
 
     return {
-        currentSkillPoints: params.maxSkillPoints - Object.values(values).reduce((acc, n) => acc + n, 0),
+        usedSkillPoints: Object.values(values).reduce((acc, n) => acc + n, 0),
         maxSkillPoints: params.maxSkillPoints,
         component: name => {
             const needs = params.elements[name]?.needs || {};

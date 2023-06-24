@@ -70,7 +70,11 @@ function App() {
     return (
         <div className="App">
             <h2>Etrian Odyssey Skill Simulator</h2>
-            <p>Skill Points: {skillTree.currentSkillPoints} / {skillTree.maxSkillPoints}</p>
+            <p style={{
+                color: skillTree.usedSkillPoints > skillTree.maxSkillPoints ? 'red' : 'white'
+            }}>
+                Skill Points: {skillTree.usedSkillPoints} / {skillTree.maxSkillPoints}
+            </p>
             <table>
                 <tbody>
                     <tr>
