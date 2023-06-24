@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function SkillNode(params) {
     return (
         <div style={{
@@ -12,6 +14,14 @@ export default function SkillNode(params) {
         </div>
     );
 }
+
+SkillNode.propTypes = {
+    enabled: PropTypes.bool,
+    name: PropTypes.string,
+    onClickUp: PropTypes.func,
+    onClickDown: PropTypes.func,
+    value: PropTypes.number,
+};
 
 const styles = {
     container: {
