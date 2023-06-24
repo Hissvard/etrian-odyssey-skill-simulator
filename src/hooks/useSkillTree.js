@@ -1,4 +1,5 @@
 import {useState} from "react";
+import SkillNode from "../components/SkillNode";
 
 export default function useSkillTree(params) {
     let initialValues = {};
@@ -54,57 +55,17 @@ export default function useSkillTree(params) {
         component: name => {
             const areNeedsMet = Object.values(missingSkillNeeds(name, params.elements, values)).length === 0;
 
-            return (
-                <div style={{
-                    ...styles.container,
-                    opacity: areNeedsMet ? 1 : .5,
-                    backgroundColor: areNeedsMet ? '#015F9C' : '#23313C',
-                }}>
-                    <span style={styles.name}>{name}</span>
-                    <button style={styles.modifierButton} onClick={() => areNeedsMet && applySkillModifier(name, -1)}>-</button>
-                    <button style={styles.modifierButton} onClick={() => areNeedsMet ? applySkillModifier(name, 1) : initializeSkillWithDependencies(name)}>+</button>
-                    <span style={styles.value}>{values[name] || 0} / 10</span>
-                </div>
-            );
+            return <SkillNode
+                name={name}
+                value={values[name] || 0}
+                data={params.elements[name]}
+                enabled={areNeedsMet}
+                onClickDown={() => areNeedsMet && applySkillModifier(name, -1)}
+                onClickUp={() => areNeedsMet ? applySkillModifier(name, 1) : initializeSkillWithDependencies(name)}
+            />;
         }
     };
 }
-
-const styles = {
-    container: {
-        display: 'flex',
-        alignItems: 'center',
-        fontWeight: 'bold',
-        fontSize: 18,
-        borderRadius: 20,
-        padding: '5px 10px',
-        color: 'white',
-        width: 300,
-        borderWidth: 1,
-    },
-
-    name: {
-        whiteSpace: 'nowrap',
-        marginRight: 'auto',
-    },
-
-    value: {
-        marginRight: 5,
-        whiteSpace: 'nowrap',
-    },
-
-    modifierButton: {
-        height: 30,
-        width: 30,
-        flex: '0 0 30px',
-        borderRadius: '50%',
-        appearance: 'none',
-        outline: 'none',
-        cursor: 'pointer',
-        border: 'none',
-        marginRight: 5,
-    }
-};
 
 function missingSkillNeeds(name, elements, values) {
     const needs = elements[name]?.needs || {};

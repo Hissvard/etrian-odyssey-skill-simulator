@@ -15,7 +15,9 @@ function App() {
     const skillTree = useSkillTree({
         maxSkillPoints: 70,
         elements: {
-            'Axes': {},
+            'Axes': {
+
+            },
             'Crush': {
                 needs: {'Axes': 1},
             },
@@ -38,7 +40,22 @@ function App() {
             'Allslash': {
                 needs: {'2-Hit': 3},
             },
-            'HP Up': {},
+            'HP Up': {
+                description: 'Increase maximum HP.',
+                data: [
+                    ['HP Gained'],
+                    ['110%'],
+                    ['111%'],
+                    ['112%'],
+                    ['113%'],
+                    ['119%'],
+                    ['120%'],
+                    ['121%'],
+                    ['122%'],
+                    ['123%'],
+                    ['130%'],
+                ]
+            },
             'Blazer': {
                 needs: {'Sword Mastery': 7, 'TP Up': 3},
             },
