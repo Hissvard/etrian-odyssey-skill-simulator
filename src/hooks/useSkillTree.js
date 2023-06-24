@@ -7,7 +7,7 @@ export default function useSkillTree(params) {
     const [values, setValues] = useState(initialValues);
 
     const applySkillModifier = (name, n) => {
-        if (values[name] + n >= 10 || values[name] + n < -1) {
+        if (values[name] + n >= 10 || values[name] + n < 0) {
             return;
         }
         setValues({
@@ -16,20 +16,43 @@ export default function useSkillTree(params) {
         });
     };
 
+    const initializeSkillWithDependencies = name => {
+        const needs = missingSkillNeeds(name, params.elements, values);
+        let newValues = {...values};
+
+        for (const requirementName in needs) {
+            const requiredValue = needs[requirementName];
+
+            if (values[requirementName] < requiredValue) {
+                newValues = {
+                    ...newValues,
+                    [requirementName]: requiredValue,
+                    [name]: 1,
+                };
+            }
+
+            // I dunnwanna use recursion. It only goes 2 levels deep anyway (Probably...)
+            const requirementNeeds = missingSkillNeeds(requirementName, params.elements, values);
+            for (const requirementNeedName in requirementNeeds) {
+                const needRequiredValue = requirementNeeds[requirementNeedName];
+
+                if (values[requirementNeedName] < needRequiredValue) {
+                    newValues = {
+                        ...newValues,
+                        [requirementNeedName]: needRequiredValue,
+                    };
+                }
+            }
+        }
+
+        setValues(newValues);
+    }
+
     return {
         usedSkillPoints: Object.values(values).reduce((acc, n) => acc + n, 0),
         maxSkillPoints: params.maxSkillPoints,
         component: name => {
-            const needs = params.elements[name]?.needs || {};
-
-            let areNeedsMet = true;
-            for (const requirementName of Object.keys(needs)) {
-                const requiredValue = params.elements[name].needs[requirementName];
-                const currentValue = values[requirementName];
-                if (currentValue < requiredValue) {
-                    areNeedsMet = false;
-                }
-            }
+            const areNeedsMet = Object.values(missingSkillNeeds(name, params.elements, values)).length === 0;
 
             return (
                 <div style={{
@@ -39,7 +62,7 @@ export default function useSkillTree(params) {
                 }}>
                     <span style={styles.name}>{name}</span>
                     <button style={styles.modifierButton} onClick={() => areNeedsMet && applySkillModifier(name, -1)}>-</button>
-                    <button style={styles.modifierButton} onClick={() => areNeedsMet && applySkillModifier(name, 1)}>+</button>
+                    <button style={styles.modifierButton} onClick={() => areNeedsMet ? applySkillModifier(name, 1) : initializeSkillWithDependencies(name)}>+</button>
                     <span style={styles.value}>{values[name] || 0} / 10</span>
                 </div>
             );
@@ -82,3 +105,21 @@ const styles = {
         marginRight: 5,
     }
 };
+
+function missingSkillNeeds(name, elements, values) {
+    const needs = elements[name]?.needs || {};
+
+    let missingNeeds = {};
+    for (const requirementName of Object.keys(needs)) {
+        const requiredValue = elements[name].needs[requirementName];
+        const currentValue = values[requirementName];
+        if (currentValue < requiredValue) {
+            missingNeeds = {
+                ...missingNeeds,
+                ...elements[name].needs
+            };
+        }
+    }
+
+    return missingNeeds;
+}
