@@ -27,7 +27,7 @@ export default function useSkillTree(params) {
     };
 
     return {
-        currentSkillPoints: 0,
+        currentSkillPoints: params.maxSkillPoints - Object.values(values).reduce((acc, n) => acc + n, 0),
         maxSkillPoints: params.maxSkillPoints,
         component: name => {
             const needs = params.elements[name]?.needs || {};
@@ -60,13 +60,11 @@ export default function useSkillTree(params) {
 const styles = {
     container: {
         display: 'flex',
+        alignItems: 'center',
         fontWeight: 'bold',
         fontSize: 18,
         borderRadius: 20,
-        paddingLeft: 5,
-        paddingRight: 5,
-        paddingTop: 2,
-        paddingBottom: 2,
+        padding: '5px 10px',
         color: 'white',
         width: 300,
         borderWidth: 1,
@@ -87,5 +85,10 @@ const styles = {
         width: 30,
         flex: '0 0 30px',
         borderRadius: '50%',
+        appearance: 'none',
+        outline: 'none',
+        cursor: 'pointer',
+        border: 'none',
+        marginRight: 5,
     }
 };
