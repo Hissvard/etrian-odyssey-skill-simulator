@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/etrian-odyssey-skill-simulator/static/css/main.de45b354.css",
-    "main.js": "/etrian-odyssey-skill-simulator/static/js/main.f1d2add5.js",
+    "main.css": "/etrian-odyssey-skill-simulator/static/css/main.8f9c41b4.css",
+    "main.js": "/etrian-odyssey-skill-simulator/static/js/main.e0c772a2.js",
     "static/js/787.d9f9d048.chunk.js": "/etrian-odyssey-skill-simulator/static/js/787.d9f9d048.chunk.js",
     "index.html": "/etrian-odyssey-skill-simulator/index.html",
-    "main.de45b354.css.map": "/etrian-odyssey-skill-simulator/static/css/main.de45b354.css.map",
-    "main.f1d2add5.js.map": "/etrian-odyssey-skill-simulator/static/js/main.f1d2add5.js.map",
+    "main.8f9c41b4.css.map": "/etrian-odyssey-skill-simulator/static/css/main.8f9c41b4.css.map",
+    "main.e0c772a2.js.map": "/etrian-odyssey-skill-simulator/static/js/main.e0c772a2.js.map",
     "787.d9f9d048.chunk.js.map": "/etrian-odyssey-skill-simulator/static/js/787.d9f9d048.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.de45b354.css",
-    "static/js/main.f1d2add5.js"
+    "static/css/main.8f9c41b4.css",
+    "static/js/main.e0c772a2.js"
   ]
 }
