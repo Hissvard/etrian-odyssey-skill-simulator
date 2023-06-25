@@ -13,9 +13,9 @@ export default function SkillData(params) {
     ];
 
     return (
-        <div style={{backgroundColor: 'white', padding: 15}}>
-            <p>{data.description}</p>
-            <table>
+        <div class='skill-data-container'>
+            <p class='skill-data-description'>{data.description}</p>
+            <table class='skill-data-table'>
                 <tr>{headerValues.map(value => <td>{value}</td>)}</tr>
                 {tableData.map(rowData => (
                     <tr>

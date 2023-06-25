@@ -59,3 +59,22 @@ body {
 [data-popper-reference-hidden] {
   z-index: 1000;
 }
+
+.skill-data-table {
+  border-collapse: collapse;
+}
+
+.skill-data-table td {
+  border: 1px solid grey;
+}
+
+.skill-data-description {
+  margin: -10px -10px 10px;
+  padding: 10px;
+  background: lightgrey;
+}
+
+.skill-data-container {
+  background: white;
+  padding: 10px;
+}
